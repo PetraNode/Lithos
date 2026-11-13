@@ -8,9 +8,13 @@ on:
       - master
     paths:
       - games/**
+      - .github/workflows/games.yml
+permissions:
+  contents: read
+  packages: write
 jobs:
   push:
-    name: "games:${{ matrix.game }}"
+    name: "lithos-games:${{ matrix.game }}"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -37,4 +41,4 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/pterodactyl/games:${{ matrix.game }}
+            ghcr.io/petranode/lithos-games:${{ matrix.game }}

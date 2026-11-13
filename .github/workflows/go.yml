@@ -8,9 +8,13 @@ on:
       - master
     paths:
       - go/**
+      - .github/workflows/go.yml
+permissions:
+  contents: read
+  packages: write
 jobs:
   push:
-    name: "yolks:go_${{ matrix.tag }}"
+    name: "lithos:go_${{ matrix.tag }}"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -43,7 +47,7 @@ jobs:
       - uses: docker/metadata-action@v5
         id: meta
         with:
-          images: ghcr.io/pterodactyl/yolks
+          images: ghcr.io/petranode/lithos
           tags: |
             type=raw,value=go_${{ matrix.tag }}
             type=raw,value=go_latest,enable=${{ matrix.tag == '1.26' }}

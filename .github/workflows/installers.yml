@@ -8,12 +8,16 @@ on:
       - master
     paths:
       - installers/**
+      - .github/workflows/installers.yml
+permissions:
+  contents: read
+  packages: write
 
 # Two separate jobs, first for multiarch (amd64, arm64), second for amd64 only
 
 jobs:
   pushMultiArch:
-    name: "yolks:installers_multiarch:${{ matrix.tag }}"
+    name: "lithos-installers:multiarch:${{ matrix.tag }}"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -42,10 +46,10 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/pterodactyl/installers:${{ matrix.tag }}
+            ghcr.io/petranode/lithos-installers:${{ matrix.tag }}
 
   pushAmd:
-    name: "yolks:installers_amd:${{ matrix.tag }}"
+    name: "lithos-installers:amd:${{ matrix.tag }}"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -70,4 +74,4 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/pterodactyl/installers:${{ matrix.tag }}
+            ghcr.io/petranode/lithos-installers:${{ matrix.tag }}

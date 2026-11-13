@@ -8,9 +8,13 @@ on:
       - master
     paths:
       - oses/**
+      - .github/workflows/base.yml
+permissions:
+  contents: read
+  packages: write
 jobs:
   push:
-    name: "yolks:${{ matrix.oses }}"
+    name: "lithos-oses:${{ matrix.oses }}"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -38,4 +42,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/pterodactyl/yolks:${{ matrix.oses }}
+            ghcr.io/petranode/lithos-oses:${{ matrix.oses }}

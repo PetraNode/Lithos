@@ -8,9 +8,13 @@ on:
       - master
     paths:
       - java/**
+      - .github/workflows/java.yml
+permissions:
+  contents: read
+  packages: write
 jobs:
   push:
-    name: "yolks:java_${{ matrix.tag }}"
+    name: "lithos:java_${{ matrix.tag }}"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -53,4 +57,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/pterodactyl/yolks:java_${{ matrix.tag }}
+            ghcr.io/petranode/lithos:java_${{ matrix.tag }}
